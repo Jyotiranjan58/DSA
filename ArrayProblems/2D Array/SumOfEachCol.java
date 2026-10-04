@@ -19,7 +19,7 @@ public class SumOfEachCol {
     }
 
     public static void main(String[] args) {
-        int[][] arr = { { 1, 2 }, { 2, 3 }, { 4, 7 }, { 5 } };
+        int[][] arr = { { 1, 2 }, { 2, 3 }, { 4, 7 } };
         List<Integer> res = sumOfCols(arr);
         for (int num : res) {
             System.out.print(num + " ");
