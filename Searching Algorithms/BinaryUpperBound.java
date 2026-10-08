@@ -21,7 +21,7 @@ public class BinaryUpperBound {
             if (arr[mid] <= target) {
                 s = mid + 1;
             } else {
-                ans = arr[mid];
+                ans = mid;
                 e = mid - 1;
             }
         }
