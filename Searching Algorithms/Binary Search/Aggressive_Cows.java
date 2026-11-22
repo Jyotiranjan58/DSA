@@ -1,3 +1,4 @@
+
 /*
 Aggressive Cows Geeks for Geeks
 
@@ -16,46 +17,40 @@ Explanation: The first cow can be placed at arr[0], the second at arr[1], and th
 
 
 */
+import java.util.*;
 
 class Solution {
 
-    static boolean isValidAnswer(int[] arr, int k, int maxValue) {
-        int count = 1;
-        int value = 0;
-        for (int i = 0; i < arr.length; i++) {
-            if (value + arr[i] <= maxValue) {
-                value = value + arr[i];
-            } else {
-                count++;
-                value = 0;
-                if (count > k || arr[i] > maxValue) {
-                    return false;
-                } else {
-                    value = value + arr[i];
+    static boolean isValidAnswer(int[] stalls, int k, int minDistance) {
+        int cowCount = 1;
+        int lastPosition = 0;
+        for (int i = 1; i < stalls.length; i++) {
+            if (stalls[i] - stalls[lastPosition] >= minDistance) {
+                cowCount++;
+                lastPosition = i;
+                if (cowCount == k) {
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
-    public int minTime(int[] arr, int k) {
+    public int aggressiveCows(int[] arr, int k) {
         // code here
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum = sum + arr[i];
-        }
+        Arrays.sort(arr);
         int s = 0;
-        int e = sum;
+        int e = arr[arr.length - 1] - arr[0];
         int ans = -1;
 
         while (s <= e) {
             int mid = s + (e - s) / 2;
             if (isValidAnswer(arr, k, mid)) {
                 ans = mid;
-                e = mid - 1;
+                s = mid + 1;
 
             } else {
-                s = mid + 1;
+                e = mid - 1;
             }
         }
         return ans;
